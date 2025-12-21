@@ -2,6 +2,7 @@ import UserService from "../services/UserService";
 import ExpenseService from "../services/expenseService";
 import DOMHelpers from "./DOMHelpers";
 import {showToast } from'../utils/toastUtile'
+import Expense from "../models/expense";
 interface IExpenseUI {
     userService: UserService,
     expenseService: ExpenseService,
@@ -17,8 +18,12 @@ class ExpenseUI implements IExpenseUI{
     expenseService: ExpenseService
     elements!: { 
         addUserForm: HTMLFormElement,
-        userInput:  HTMLInputElement, 
+        userInput: HTMLInputElement, 
+        addExpenseForm: HTMLFormElement,
         expenseUserInput: HTMLSelectElement,
+        expenseAmountInput: HTMLInputElement,
+        expenseReasonInput: HTMLTextAreaElement,
+        paymentList: HTMLUListElement,
     };
 
     constructor(userService: UserService, expenseService: ExpenseService){
@@ -34,13 +39,22 @@ class ExpenseUI implements IExpenseUI{
         this.elements = {
             addUserForm: DOMHelpers.getElementById('addUserForm') as HTMLFormElement,
             userInput: DOMHelpers.getElementById('addUser') as HTMLInputElement,
+            addExpenseForm: DOMHelpers.getElementById('addExpenseForm') as HTMLFormElement,
             expenseUserInput: DOMHelpers.getElementById('expenseUserInput') as HTMLSelectElement,
+            expenseAmountInput: DOMHelpers.getElementById('expenseAmountInput') as HTMLInputElement,
+            expenseReasonInput: DOMHelpers.getElementById('expenseReasonInput') as HTMLTextAreaElement,
+            paymentList: DOMHelpers.getElementById('payment-list') as HTMLUListElement,
+            
         }
     }
 
     bindEvent(): void{
         this.elements?.addUserForm?.addEventListener('submit', (e) => {
             this.handleAddUser(e) 
+        })
+
+        this.elements.addExpenseForm?.addEventListener('submit', (e) => {
+            this.handleAddExpense(e)
         })
     }
 
@@ -65,10 +79,53 @@ class ExpenseUI implements IExpenseUI{
             
         } catch (error) {
             console.error('Error adding User', error)
-            showToast(`${error}`, 'error')
+            if (error instanceof Error) {
+                showToast(error.message, 'error')
+            }
         }
     }
 
+    handleAddExpense(e: Event){
+        e.preventDefault()
+
+        try {
+            // get selected user
+            const paidBy = this.elements.expenseUserInput.value.trim()
+            // get amount
+            const amount = this.elements.expenseAmountInput.valueAsNumber
+            // get description
+            const description = this.elements.expenseReasonInput.value.trim()
+
+
+            if (!paidBy) {
+                throw new Error("Please select a user");
+            }
+
+            if (Number.isNaN(amount) || amount <= 0) {
+                throw new Error("Please enter an amount greater than zero")
+            }
+
+
+            // add expense form User expenses
+            const expense = this.expenseService.addExpense(paidBy, amount, description)
+            
+            // render expense to all payment overview
+            this.renderExpense(expense)
+
+            // rest the form 
+            this.elements.expenseAmountInput.value = ''
+            this.elements.expenseReasonInput.value = ''
+            // show toast
+            showToast(`Expense ${amount} added by ${paidBy}`)
+            console.log(`Expense ${amount} added by ${paidBy}`);
+            
+        } catch (error) {
+            console.error("Error adding Expense:", error)
+            if (error instanceof Error) {
+                showToast(error.message, 'error')
+            }
+        }
+    }
     // initializeSelectBox(){
     //     // get the select box element
         
@@ -83,6 +140,18 @@ class ExpenseUI implements IExpenseUI{
     addUserToSelectBox(username: string){
         const option = DOMHelpers.createOption(username, username)
         this.elements.expenseUserInput.add(option)
+    }
+
+    renderExpense(expense: Expense){
+        const formatText = expense.description !== "No description"
+        ?
+            `${expense.paidBy} paid ${expense.amount}$ for ${expense.description}`
+        :
+            `${expense.paidBy} paid ${expense.amount}$`
+
+        const listItem = DOMHelpers.createListItem(formatText, 'li-style')
+        
+        this.elements.paymentList.appendChild(listItem)
     }
 
 }
