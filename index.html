@@ -12,9 +12,9 @@
 
 <body>
   <div id="app" class="min-h-screen font-display">
-    <div class="mx-auto max-w-7xl h-svh p-4 md:p-6 lg:p-8">
+    <div class="flex flex-col mx-auto h-dvh max-w-7xl px-4 md:px-6 lg:px-8">
       <!-- header -->
-      <header class="flex justify-between items-center p-2 mb-10">
+      <header class="flex justify-between items-center p-2 mb-10  z-50 shadow-[0_3px_4px_-2px_rgba(0,0,0,0.1)]">
         <div class="flex items-center gap-2">
           <figure>
             <img class="w-13" src="/src/assets/images/logo.png" alt="logo img">
@@ -36,7 +36,7 @@
       </header>
 
       <!-- main -->
-      <main class="text-zinc-500">
+      <main class="flex-1 text-zinc-500">
         <!-- top side -->
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 mb-10">
           <!-- Add user form -->
@@ -151,6 +151,39 @@
         </div>
 
       </main>
+
+      <!-- footer -->
+      <footer class="bg-zinc-800 text-zinc-500 mt-10 p-4 text-xs md:text-md rounded-t-xl ">
+        <p class="md:hidden flex justify-center">
+          Made with
+          by<a title="contact with us" class=" mx-3 text-zinc-400 font-bold"
+            href="mailto:ahmedbadey.dev@gmail.com">Ahmed
+            Badry</a> for
+          splitting
+          expenses
+          fairly
+        </p>
+
+        <p class="hidden md:flex justify-center">
+          Made with
+          <span class="mx-3 text-zinc-100 flex items-center">
+            <svg class="w-4 h-4 " viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z"
+                  fill="oklch(70.5% 0.015 286.067)"></path>
+              </g>
+            </svg>
+          </span> by <a title="contact with us" class=" mx-3 text-zinc-400 font-bold"
+            href="mailto:ahmedbadey.dev@gmail.com">Ahmed
+            Badry</a> for
+          splitting
+          expenses
+          fairly
+        </p>
+      </footer>
     </div>
   </div>
 </body>
