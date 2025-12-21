@@ -3,27 +3,154 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/Splitter-App/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>splitter</title>
+  <title>splitter</title>
 
-  <script type="module" crossorigin src="/Splitter-App/assets/index-BP-QFTD1.js"></script>
-  <link rel="stylesheet" crossorigin href="/Splitter-App/assets/index-D5QUtpdV.css">
+  <script type="module" crossorigin src="/Splitter-App/assets/index-BMAQmPgp.js"></script>
+  <link rel="stylesheet" crossorigin href="/Splitter-App/assets/index-CEPKPYGG.css">
 </head>
 
 <body>
-  <div id="app">
-    <div>
-      <h1 class="bg-amber-500 text-8xl">hello</h1>
-    </div>
-    <div>
-      <h1 class="bg-amber-500 text-8xl">hello</h1>
-    </div>
-    <div>
-      <h1 class="bg-amber-500 text-8xl">hello</h1>
-    </div>
-    <div>
-      <h1 class="bg-amber-500 text-8xl">hello</h1>
+  <div id="app" class="min-h-screen font-display">
+    <div class="mx-auto max-w-7xl h-svh p-4 md:p-6 lg:p-8">
+      <!-- header -->
+      <header class="flex justify-between items-center p-2 mb-10">
+        <div class="flex items-center gap-2">
+          <figure>
+            <img class="w-13" src="/Splitter-App/assets/logo-C3R71vce.png" alt="logo img">
+          </figure>
+          <span class="text-4xl font-bold ">Splitter</span>
+        </div>
+        <!-- mobile nav -->
+        <nav class="md:hidden">
+          <span class="text-sm font-bold p-2 border-r-zinc-500 border-r ">Export</span>
+          <span class="text-sm font-bold p-2">Import</span>
+        </nav>
+        <!-- md nav -->
+        <nav class="hidden justify-evenly items-center gap-2 md:flex">
+          <button
+            class="w-30 min-w-30 p-3 px-5 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out">Export</button>
+          <button
+            class="w-30 min-w-30 p-3 px-5 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out">Import</button>
+        </nav>
+      </header>
+
+      <!-- main -->
+      <main class="text-zinc-500">
+        <!-- top side -->
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 mb-10">
+          <!-- Add user form -->
+          <form action="" id="addUserForm">
+            <fieldset class="p-4 border border-zinc-200 shadow-sm rounded-md">
+              <legend class="text-2xl font-bold">Add User</legend>
+              <input type="text" id="addUser"
+                class="w-full p-4 mb-5 rounded-xl border border-zinc-100 focus:outline-zinc-300 shadow-sm placeholder:text-zinc-400"
+                placeholder="Enter user name">
+              <!-- add user btn -->
+              <button id="addUserBtn" type="submit"
+                class="w-full p-4 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out">Add
+                User</button>
+            </fieldset>
+          </form>
+
+          <!-- Add Expense form -->
+          <form action="" id="addExpenseForm">
+            <fieldset
+              class="grid grid-cols-1 gap-y-5 p-4 border border-zinc-200 shadow-sm rounded-md md:grid-cols-4 md:gap-5">
+              <legend class="text-2xl font-bold">Add Expense</legend>
+              <!-- who paid input -->
+              <div class="col-span-2 relative w-full ">
+                <select
+                  class="w-full p-4 rounded-xl border border-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-300 shadow-sm appearance-none"
+                  name="expenseUser" id="expenseUserInput">
+                  <option value="" disabled selected>Who paid</option>
+                </select>
+
+                <!-- Custom Arrow -->
+                <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                  <svg class="w-5 h-5 text-zinc-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+
+              </div>
+              <!-- how mach paid -->
+              <div class="col-span-2 ">
+                <input type="number" id="expenseAmountInput" min="0" step="0.1"
+                  class="w-full h-full  p-4 rounded-xl border border-zinc-100 focus:outline-zinc-300 shadow-sm placeholder:text-zinc-400"
+                  placeholder="e.g.100">
+              </div>
+              <!-- Description -->
+              <div class="col-span-3 max-h-14">
+                <textarea id="expenseReasonInput" placeholder="Description"
+                  class="w-full h-full pt-4 px-4 resize-none  border border-gray-300 rounded-xl  focus:outline-zinc-300 shadow-sm placeholder:text-zinc-400"></textarea>
+              </div>
+              <!-- Add expenses btn -->
+              <button id="addExpenseBtn" type="submit"
+                class="h-fit p-4 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out md:max-w-40">Add
+              </button>
+            </fieldset>
+          </form>
+        </div>
+
+        <!-- bottom side -->
+        <div id="renderExpenses" class="bg-zinc-100 p-4 rounded-xl">
+
+          <!-- header -->
+          <h2 class="col-span-1 text-2xl font-bold mb-10 md:text-3xl">Expense Overview</h2>
+
+          <div class="grid grid-cols-1 gap-y-10 lg:gap-y-0 lg:grid-cols-7">
+            <!-- All payment -->
+            <div id="" class="col-span-3">
+              <fieldset class="p-4 border border-zinc-200 shadow-sm rounded-md">
+                <legend class="text-lg font-bold ">All Payments</legend>
+                <ul id="payment-list" class="flex flex-col gap-y-2">
+                  <li class="li-style">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Quos
+                    sunt blanditiis dolorum impedit doloribus doloremque saepe velit ratione. Itaque totam dolor
+                    pariatur,
+                    soluta ducimus quos quaerat labore quia est aspernatur!</li>
+
+                </ul>
+              </fieldset>
+            </div>
+
+            <!-- process btm -->
+            <div class="col-span-1 flex items-center justify-center">
+              <button id="simplifyBtn" type="button" class=" btn-animated ">
+                <span>Settling</span>
+              </button>
+              <div class=" hidden spinner"></div>
+            </div>
+
+            <!-- settlements -->
+            <div id="settleDiv" class="hidden col-span-3">
+              <fieldset class="h-full p-4 border border-zinc-200 shadow-sm rounded-md">
+                <legend class="text-lg font-bold">Who Owes Whom</legend>
+                <ul id="payment-list" class="flex flex-col gap-y-2">
+                </ul>
+              </fieldset>
+            </div>
+
+
+            <!-- settlements loader-->
+            <div id="settleDivLoader" class=" col-span-3">
+              <fieldset class="h-full p-4 border border-zinc-200 shadow-sm rounded-md">
+                <legend class="text-lg font-bold">Who Owes Whom</legend>
+                <ul id="payment-list" class="flex flex-col gap-y-2">
+                  <li class="li-fak animate-pulse max-w-30"></li>
+                  <li class="li-fak animate-pulse"></li>
+                  <li class="li-fak animate-pulse max-w-70"></li>
+                  <li class="li-fak animate-pulse"></li>
+                </ul>
+              </fieldset>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
     </div>
   </div>
 </body>
