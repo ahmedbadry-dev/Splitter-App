@@ -10,6 +10,10 @@ class DOMHelpers {
 
         return element
     }
+
+    static createOption(text: string , value: string){
+        return new Option(text, value)
+    }
 }
 
 export default DOMHelpers

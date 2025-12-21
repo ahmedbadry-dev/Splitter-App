@@ -5,7 +5,7 @@ import ExpenseService from "./services/expenseService";
 class ExpenseApp {
     private userService: UserService
     private expenseService: ExpenseService
-    private ui!: ExpenseUI
+    ui!: ExpenseUI
 
     constructor(){
         this.userService = new UserService()
@@ -22,7 +22,16 @@ class ExpenseApp {
     }
 }
 
+let expenseApp: ExpenseApp;
 document.addEventListener('DOMContentLoaded', () => {
-    const expenseApp = new ExpenseApp()
+    expenseApp = new ExpenseApp()
     expenseApp.init()
+})
+
+
+window.addEventListener('load', () => {
+    if (!expenseApp) {
+        expenseApp = new ExpenseApp()
+        expenseApp.init()
+    }
 })
