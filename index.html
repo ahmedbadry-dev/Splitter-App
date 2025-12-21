@@ -52,6 +52,46 @@
                 User</button>
             </fieldset>
           </form>
+
+          <!-- Add Expense form -->
+          <form action="" id="addExpenseForm">
+            <fieldset
+              class="grid grid-cols-1 gap-y-5 p-4 border border-zinc-200 shadow-sm rounded-md md:grid-cols-4 md:gap-5">
+              <legend class="text-2xl font-bold">Add Expense</legend>
+              <!-- who paid input -->
+              <div class="col-span-2 relative w-full ">
+                <select
+                  class="w-full p-4 rounded-xl border border-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-300 shadow-sm appearance-none"
+                  name="expenseUser" id="expenseUserInput">
+                  <option value="" disabled selected>Who paid</option>
+                </select>
+
+                <!-- Custom Arrow -->
+                <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                  <svg class="w-5 h-5 text-zinc-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+
+              </div>
+              <!-- how mach paid -->
+              <div class="col-span-2 ">
+                <input type="number" id="expenseAmountInput" min="0" step="0.1"
+                  class="w-full h-full  p-4 rounded-xl border border-zinc-100 focus:outline-zinc-300 shadow-sm placeholder:text-zinc-400"
+                  placeholder="e.g.100">
+              </div>
+              <!-- Description -->
+              <div class="col-span-3 max-h-14">
+                <textarea id="expenseReasonInput" placeholder="Description"
+                  class="w-full h-full pt-4 px-4 resize-none  border border-gray-300 rounded-xl  focus:outline-zinc-300 shadow-sm placeholder:text-zinc-400"></textarea>
+              </div>
+              <!-- Add expenses btn -->
+              <button id="addExpenseBtn" type="submit"
+                class="h-fit p-4 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out md:max-w-40">Add
+              </button>
+            </fieldset>
+          </form>
         </div>
 
       </main>
