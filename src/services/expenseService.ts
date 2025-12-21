@@ -1,9 +1,21 @@
 import Expense from '../models/expense'
 import UserService from './UserService'
 
-class ExpenseService {
-    private expenses: Expense[]
-    private userService: UserService
+interface IExpenseService {
+    expenses: Expense[],
+    userService: UserService,
+
+    addExpense(paidBy: string, amount: number, description?: string): Expense
+    getExpenseByUser(name: string): Expense[]
+    getAllExpenses(): Expense[]
+    getExpenseCount(): number
+    clear(): void
+}
+
+
+class ExpenseService implements IExpenseService {
+    expenses: Expense[]
+    userService: UserService
 
     constructor(userService: UserService) {
         this.expenses = []
@@ -55,6 +67,8 @@ class ExpenseService {
     clear(): void {
         this.expenses = []
     }
+
+    // simplifyExpenses(){}
 }
 
 export default ExpenseService

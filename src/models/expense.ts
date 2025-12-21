@@ -4,6 +4,7 @@ interface IExpense {
     amount: number,
     description?: string,
     timestamp: string,
+    generateId(): string
 }
 
 class Expense implements IExpense {

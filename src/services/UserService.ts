@@ -1,18 +1,34 @@
 import User from "../models/user";
 
-class UserService {
+interface IUserSErvice {
+    users: Map<string, User>
+    validateName(name: string) : string
+    addUser(name: string): User
+    getUser(name: string): User
+    getAllUsers(): User[]
+    getAllUsersName(): string[]
+    hasUser(name: string): boolean
+    getUsersCount(): number
+    removeUser(name: string): boolean
+    clear(): void
+}
+
+class UserService implements IUserSErvice{
     users: Map<string, User>
 
     constructor() {
         this.users = new Map<string, User>()
     }
-
-    addUser(name: string): User {
+    validateName(name: string): string {
         if (!name || typeof name !== 'string') {
             throw new Error("User name is required and must be a string")
         }
+        return name.trim()
+    }
 
-        const trimmedName = name.trim()
+
+    addUser(name: string): User {
+        const trimmedName = this.validateName(name)
         if (this.users.has(trimmedName)) {
             throw new Error("This name is already added")
         }
@@ -22,11 +38,15 @@ class UserService {
         return user
     }
 
-    getUser(name: string): User | undefined {
-        if (!name || typeof name !== 'string') {
-            throw new Error("User name is required and must be a string")
+    getUser(name: string): User  {
+        const trimmedName = this.validateName(name)
+        const user = this.users.get(trimmedName)
+
+        if (!user) {
+            throw new Error("User not found");
         }
-        return this.users.get(name.trim())
+
+        return user
     }
 
     getAllUsers(): User[] {
@@ -46,10 +66,8 @@ class UserService {
     }
 
     removeUser(name: string): boolean {
-        if (!name || typeof name !== 'string') {
-            throw new Error("User name is required and must be a string")
-        }
-        return this.users.delete(name.trim())
+        const trimmedName = this.validateName(name)
+        return this.users.delete(trimmedName)
     }
     clear(): void{
         this.users.clear()
