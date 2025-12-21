@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>splitter</title>
   <link rel="stylesheet" href="/src/style.css">
@@ -14,7 +13,28 @@
 <body>
   <div id="app" class="min-h-screen font-display">
     <div class="mx-auto max-w-7xl h-svh p-4 md:p-6 lg:p-8">
-
+      <header class="mb-10">
+        <header class="flex justify-between items-center p-2">
+          <div class="flex items-center gap-2">
+            <figure>
+              <img class="w-13" src="/src/assets/images/logo.png" alt="logo img">
+            </figure>
+            <span class="text-4xl font-bold ">Splitter</span>
+          </div>
+          <!-- mobile nav -->
+          <nav class="md:hidden">
+            <span class="text-sm font-bold p-2 border-r-zinc-500 border-r ">Export</span>
+            <span class="text-sm font-bold p-2">Import</span>
+          </nav>
+          <!-- md nav -->
+          <nav class="hidden justify-evenly items-center gap-2 md:flex">
+            <button
+              class="w-30 min-w-30 p-3 px-5 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out">Export</button>
+            <button
+              class="w-30 min-w-30 p-3 px-5 rounded-xl bg-zinc-700 text-zinc-200 font-bold shadow-sm hover:cursor-pointer hover:tracking-wider hover:bg-zinc-800 transition-all duration-300 ease-in-out">Import</button>
+          </nav>
+        </header>
+      </header>
     </div>
   </div>
 </body>
