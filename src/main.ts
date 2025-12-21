@@ -1,2 +1,2 @@
 
-console.log("test");
+import Expense from './models/expense'
