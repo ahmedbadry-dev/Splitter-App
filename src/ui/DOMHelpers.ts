@@ -33,19 +33,19 @@ class DOMHelpers {
         }
     }
 
-static appendFragment<T>(
-    parent: HTMLElement,
-    items: T[],
-    createItemFn: (item: T) => HTMLElement
-): void {
-    const fragment = document.createDocumentFragment()
+    static appendFragment<T>(
+        parent: HTMLElement,
+        items: T[],
+        createItemFn: (item: T) => HTMLElement
+    ): void {
+        const fragment = document.createDocumentFragment()
 
-    items.forEach(item => {
-        fragment.appendChild(createItemFn(item))
-    })
+        items.forEach(item => {
+            fragment.appendChild(createItemFn(item))
+        })
 
-    parent.appendChild(fragment)
-}
+        parent.appendChild(fragment)
+    }
 
 }
 
