@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>splitter</title>
+  <title>splitter</title>
+  <!-- toastify  -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script async type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 
-  <script type="module" crossorigin src="/Splitter-App/assets/index-hc7d9wMj.js"></script>
-  <link rel="stylesheet" crossorigin href="/Splitter-App/assets/index-CEYN2Ix0.css">
+  <script type="module" crossorigin src="/Splitter-App/assets/index-DSpb5ors.js"></script>
+  <link rel="stylesheet" crossorigin href="/Splitter-App/assets/index-o71Sh3F0.css">
 </head>
 
 <body>
@@ -63,7 +67,7 @@
                 <select
                   class="w-full p-4 rounded-xl border border-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-300 shadow-sm appearance-none"
                   name="expenseUser" id="expenseUserInput">
-                  <option value="" disabled selected>Who paid</option>
+                  <option value="" disabled selected>Select User</option>
                 </select>
 
                 <!-- Custom Arrow -->
@@ -103,14 +107,9 @@
           <div class="grid grid-cols-1 gap-y-10 lg:gap-y-0 lg:grid-cols-7">
             <!-- All payment -->
             <div id="" class="col-span-3">
-              <fieldset class="p-4 border border-zinc-200 shadow-sm rounded-md">
+              <fieldset class="p-4 border h-full border-zinc-200 shadow-sm rounded-md">
                 <legend class="text-lg font-bold ">All Payments</legend>
-                <ul id="payment-list" class="flex flex-col gap-y-2">
-                  <li class="li-style">Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quos
-                    sunt blanditiis dolorum impedit doloribus doloremque saepe velit ratione. Itaque totam dolor
-                    pariatur,
-                    soluta ducimus quos quaerat labore quia est aspernatur!</li>
+                <ul id="payment-list" class="flex flex-col  gap-y-2">
 
                 </ul>
               </fieldset>
@@ -125,17 +124,17 @@
             </div>
 
             <!-- settlements -->
-            <div id="settleDiv" class="hidden col-span-3">
+            <div id="settleDiv" class=" col-span-3">
               <fieldset class="h-full p-4 border border-zinc-200 shadow-sm rounded-md">
                 <legend class="text-lg font-bold">Who Owes Whom</legend>
-                <ul id="payment-list" class="flex flex-col gap-y-2">
+                <ul id="resultArea" class="flex flex-col gap-y-2">
                 </ul>
               </fieldset>
             </div>
 
 
             <!-- settlements loader-->
-            <div id="settleDivLoader" class=" col-span-3">
+            <div id="settleDivLoader" class="hidden col-span-3">
               <fieldset class="h-full p-4 border border-zinc-200 shadow-sm rounded-md">
                 <legend class="text-lg font-bold">Who Owes Whom</legend>
                 <ul id="payment-list" class="flex flex-col gap-y-2">
