@@ -28,7 +28,7 @@ class Expense implements IExpense {
 
         this.paidBy = paidBy.trim();
         this.amount = parseFloat(amount.toFixed(2));
-        this.description = description?? 'No description';
+        this.description = description || 'No description';
         this.timestamp = new Date().toISOString();
         this.id = this.generateId();
     }

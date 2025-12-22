@@ -1,31 +1,34 @@
 
 class DOMHelpers {
-    static getElementById(id: string): HTMLElement {
-        const element = document.getElementById(id)
-
-        if (!element) {
-            throw new Error(`Element with ${id} is not found`);
-            
-        }
-
-        return element
+static getElementById<T extends HTMLElement>(id: string): T {
+    const element = document.getElementById(id)
+    if (!element) {
+        throw new Error(`Element with id "${id}" not found`)
     }
+    return element as T
+}
+
 
     static createOption(text: string , value: string){
         return new Option(text, value)
     }
     
 
-    static createListItem(text: string, className: string=''): HTMLLIElement{
+    static createListItem(
+        text: string,
+        className: string | string[] = []
+    ): HTMLLIElement {
         const li = document.createElement('li')
         li.textContent = text
 
-        if (className) {
+        if (typeof className === 'string' && className.trim()) {
             li.classList.add(className)
+        } else if (Array.isArray(className) && className.length) {
+            li.classList.add(...className.filter(c => c.trim()))
         }
+    return li
+}
 
-        return li
-    }
 
     static clearElement(element: HTMLElement): void{
         while(element.firstChild){
@@ -47,6 +50,9 @@ class DOMHelpers {
         parent.appendChild(fragment)
     }
 
+    static hideElement(element: HTMLElement): void {
+        element.classList.add('hidden')
+    }
 }
 
 export default DOMHelpers

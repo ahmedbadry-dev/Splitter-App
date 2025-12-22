@@ -16,17 +16,20 @@ interface IExpenseUI {
 class ExpenseUI implements IExpenseUI{
     userService: UserService
     expenseService: ExpenseService
-    elements!: { 
-        addUserForm: HTMLFormElement,
-        userInput: HTMLInputElement, 
-        addExpenseForm: HTMLFormElement,
-        expenseUserInput: HTMLSelectElement,
-        expenseAmountInput: HTMLInputElement,
-        expenseReasonInput: HTMLTextAreaElement,
-        paymentList: HTMLUListElement,
-        simplifyBtn: HTMLButtonElement,
-        resultArea:HTMLUListElement,
-    };
+    elements!: {
+        addUserForm: HTMLFormElement
+        userInput: HTMLInputElement
+        addExpenseForm: HTMLFormElement
+        expenseUserInput: HTMLSelectElement
+        expenseAmountInput: HTMLInputElement
+        expenseReasonInput: HTMLTextAreaElement
+        paymentList: HTMLUListElement
+        simplifyBtn: HTMLButtonElement
+        resultArea: HTMLUListElement
+        settledHint: HTMLSpanElement
+        expenseHint: HTMLSpanElement
+    }
+
 
     constructor(userService: UserService, expenseService: ExpenseService){
         this.userService = userService
@@ -39,17 +42,22 @@ class ExpenseUI implements IExpenseUI{
 
     initializeElements(): void {
         this.elements = {
-            addUserForm: DOMHelpers.getElementById('addUserForm') as HTMLFormElement,
-            userInput: DOMHelpers.getElementById('addUser') as HTMLInputElement,
-            addExpenseForm: DOMHelpers.getElementById('addExpenseForm') as HTMLFormElement,
-            expenseUserInput: DOMHelpers.getElementById('expenseUserInput') as HTMLSelectElement,
-            expenseAmountInput: DOMHelpers.getElementById('expenseAmountInput') as HTMLInputElement,
-            expenseReasonInput: DOMHelpers.getElementById('expenseReasonInput') as HTMLTextAreaElement,
-            paymentList: DOMHelpers.getElementById('payment-list') as HTMLUListElement,
-            simplifyBtn: DOMHelpers.getElementById('simplifyBtn') as HTMLButtonElement,
-            resultArea: DOMHelpers.getElementById('resultArea') as HTMLUListElement,
-            
+            addUserForm: DOMHelpers.getElementById<HTMLFormElement>('addUserForm'),
+            userInput: DOMHelpers.getElementById<HTMLInputElement>('addUser'),
+
+            addExpenseForm: DOMHelpers.getElementById<HTMLFormElement>('addExpenseForm'),
+            expenseUserInput: DOMHelpers.getElementById<HTMLSelectElement>('expenseUserInput'),
+            expenseAmountInput: DOMHelpers.getElementById<HTMLInputElement>('expenseAmountInput'),
+            expenseReasonInput: DOMHelpers.getElementById<HTMLTextAreaElement>('expenseReasonInput'),
+
+            paymentList: DOMHelpers.getElementById<HTMLUListElement>('payment-list'),
+            simplifyBtn: DOMHelpers.getElementById<HTMLButtonElement>('simplifyBtn'),
+
+            resultArea: DOMHelpers.getElementById<HTMLUListElement>('resultArea'),
+            settledHint: DOMHelpers.getElementById<HTMLSpanElement>('settledHint'),
+            expenseHint: DOMHelpers.getElementById<HTMLSpanElement>('expenseHint'),
         }
+
     }
 
     bindEvent(): void{
@@ -116,7 +124,6 @@ class ExpenseUI implements IExpenseUI{
 
             // add expense form User expenses
             const expense = this.expenseService.addExpense(paidBy, amount, description)
-            
             // render expense to all payment overview
             this.renderExpense(expense)
 
@@ -150,13 +157,21 @@ class ExpenseUI implements IExpenseUI{
     }
 
     renderExpense(expense: Expense){
-        const formatText = expense.description !== "No description"
+
+        // hide hint
+        // hide hints
+            DOMHelpers.hideElement(this.elements.settledHint)
+            DOMHelpers.hideElement(this.elements.expenseHint)
+            console.log(`${this.elements.settledHint}`);
+            console.log(expense);
+            
+        const formatText = expense.description?.trim() !== "No description"
         ?
             `${expense.paidBy} paid ${expense.amount}$ for ${expense.description}`
         :
             `${expense.paidBy} paid ${expense.amount}$`
 
-        const listItem = DOMHelpers.createListItem(formatText, 'li-style')
+        const listItem = DOMHelpers.createListItem(formatText, ['li-style', 'animate-fadeIn'])
         
         this.elements.paymentList.appendChild(listItem)
     }
@@ -189,7 +204,7 @@ class ExpenseUI implements IExpenseUI{
         DOMHelpers.appendFragment(
             this.elements.resultArea,
             results,
-            (result) => DOMHelpers.createListItem(result, "settlement-item")
+            (result) => DOMHelpers.createListItem(result, ['li-style', 'animate-fadeIn'])
         )
     }
 

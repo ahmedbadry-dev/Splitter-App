@@ -21,6 +21,11 @@ export function showToast(
     stopOnFocus: true,
     style: {
       background: toastStyles[type],
+      minWidth: '300px',
+      borderRadius: '8px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: '20px'
     },
   }).showToast()
 }

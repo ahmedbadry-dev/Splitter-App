@@ -12,10 +12,49 @@
         @apply bg-zinc-200 p-2 rounded-md
     }
 
+    .l-hint {
+        @apply bg-zinc-200 text-zinc-400 text-xl opacity-70 min-h-20 p-2 rounded-md
+    }
+
     .li-fak {
         @apply bg-zinc-300 p-4 rounded-md
     }
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+        /* حركة بسيطة للأعلى */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+    /* forwards عشان يثبت في النهاية */
+}
+
+
+.no-results {
+    background-color: #e7e3e4;
+    color: #9f9fa9;
+    opacity: .7;
+    min-height: 80px;
+    line-height: 1.4;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+
 
 /* From Uiverse.io by ZacharyCrespin */
 .spinner {
