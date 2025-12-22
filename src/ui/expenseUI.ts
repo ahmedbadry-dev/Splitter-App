@@ -28,7 +28,6 @@ class ExpenseUI implements IExpenseUI{
         resultArea: HTMLUListElement
         settledHint: HTMLSpanElement
         expenseHint: HTMLSpanElement
-        settleDivLoader: HTMLDivElement
         settleDiv: HTMLDivElement
     }
 
@@ -58,7 +57,6 @@ class ExpenseUI implements IExpenseUI{
             resultArea: DOMHelpers.getElementById<HTMLUListElement>('resultArea'),
             settledHint: DOMHelpers.getElementById<HTMLSpanElement>('settledHint'),
             expenseHint: DOMHelpers.getElementById<HTMLSpanElement>('expenseHint'),
-            settleDivLoader: DOMHelpers.getElementById<HTMLDivElement>('settleDivLoader'),
             settleDiv: DOMHelpers.getElementById<HTMLDivElement>('settleDiv'),
         }
 
@@ -231,9 +229,6 @@ class ExpenseUI implements IExpenseUI{
     setTimeout(() => {
         // Clear loading
         DOMHelpers.clearElement(this.elements?.resultArea);
-
-        this.elements?.settleDiv.classList.remove('hidden');
-        this.elements?.settleDivLoader.classList.add('hidden');
 
         if (results.length === 0) {
             const noResultsItem = DOMHelpers.createListItem('All expenses are settled!', 'no-results');
