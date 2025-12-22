@@ -36,10 +36,42 @@ Splitter App is a lightweight web application to help groups **track shared expe
 
 ## 📸 Screenshots
 
-![SplitterApp](screenshots/SplitterApp.png)
-![add Expense](screenshots/add-expense.png)
+### 🏠 Main Application View
+
+This is the main screen of the Splitter App where users can manage participants and expenses.
+
+![Splitter App](screenshots/SplitterApp.png)
+
+---
+
+### ➕ Add New Expense
+
+Form used to select a user, enter the amount, and add an expense with an optional description.
+
+![Add Expense](screenshots/add-expense.png)
+
+---
+
+### 📋 All Payments Overview
+
+Displays all added expenses grouped by users.
+
 ![All Payments](screenshots/all-expenses.png)
+
+---
+
+### ⏳ Settlements Loading State
+
+Skeleton loading UI shown while calculating expense settlements.
+
 ![Settlements Loading](screenshots/loading.png)
+
+---
+
+### ✅ Settlements Result
+
+Final simplified results showing who owes whom and how much.
+
 ![Settlements Result](screenshots/after-spletting.png)
 
 ---
