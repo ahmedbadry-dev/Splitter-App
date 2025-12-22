@@ -37,11 +37,11 @@ Splitter App is a lightweight web application to help groups **track shared expe
 ## 📸 Screenshots
 
 ```
-![SplitterApp]("./screenshots/SplitterApp.png")
-![add Expense]("./screenshots/add-expense.png")
-![All Payments]("./screenshots/all-expenses.png")
-![Settlements Loading]("./screenshots/loading.png")
-![Settlements Result]("./screenshots/after-spletting.png")
+![SplitterApp](screenshots/SplitterApp.png)
+![add Expense](screenshots/add-expense.png)
+![All Payments](screenshots/all-expenses.png)
+![Settlements Loading](screenshots/loading.png)
+![Settlements Result](screenshots/after-spletting.png)
 ```
 
 ---
