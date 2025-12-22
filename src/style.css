@@ -17,7 +17,7 @@
     }
 
     .li-fak {
-        @apply bg-zinc-300 p-4 rounded-md
+        @apply bg-zinc-300 p-4 rounded-md animate-pulse
     }
 }
 
