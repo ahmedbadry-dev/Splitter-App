@@ -24,6 +24,8 @@ class ExpenseUI implements IExpenseUI{
         expenseAmountInput: HTMLInputElement,
         expenseReasonInput: HTMLTextAreaElement,
         paymentList: HTMLUListElement,
+        simplifyBtn: HTMLButtonElement,
+        resultArea:HTMLUListElement,
     };
 
     constructor(userService: UserService, expenseService: ExpenseService){
@@ -44,6 +46,8 @@ class ExpenseUI implements IExpenseUI{
             expenseAmountInput: DOMHelpers.getElementById('expenseAmountInput') as HTMLInputElement,
             expenseReasonInput: DOMHelpers.getElementById('expenseReasonInput') as HTMLTextAreaElement,
             paymentList: DOMHelpers.getElementById('payment-list') as HTMLUListElement,
+            simplifyBtn: DOMHelpers.getElementById('simplifyBtn') as HTMLButtonElement,
+            resultArea: DOMHelpers.getElementById('resultArea') as HTMLUListElement,
             
         }
     }
@@ -55,6 +59,10 @@ class ExpenseUI implements IExpenseUI{
 
         this.elements.addExpenseForm?.addEventListener('submit', (e) => {
             this.handleAddExpense(e)
+        })
+
+        this.elements.simplifyBtn?.addEventListener('click', () => {
+            this.handleSimplify()
         })
     }
 
@@ -117,7 +125,6 @@ class ExpenseUI implements IExpenseUI{
             this.elements.expenseReasonInput.value = ''
             // show toast
             showToast(`Expense ${amount} added by ${paidBy}`)
-            console.log(`Expense ${amount} added by ${paidBy}`);
             
         } catch (error) {
             console.error("Error adding Expense:", error)
@@ -152,6 +159,38 @@ class ExpenseUI implements IExpenseUI{
         const listItem = DOMHelpers.createListItem(formatText, 'li-style')
         
         this.elements.paymentList.appendChild(listItem)
+    }
+
+
+    handleSimplify(){
+        try {
+            const results = this.expenseService.simplifyExpenses()
+            this.displayResults(results)
+        } catch (error) {
+            console.error('Error simplifying expenses', error)
+            if (error instanceof Error) {
+                showToast(`Error simplifying expenses: ${error.message}`, 'error')
+            }
+            
+        }
+    }
+
+    displayResults(results: string[]){
+        console.log(results);
+        
+        DOMHelpers.clearElement(this.elements?.resultArea)
+        
+        if (results.length === 0) {
+            const noResultsItem = DOMHelpers.createListItem('All expense are settled!', "no-results")
+            this.elements?.resultArea.appendChild(noResultsItem)
+            return;
+        }
+
+        DOMHelpers.appendFragment(
+            this.elements.resultArea,
+            results,
+            (result) => DOMHelpers.createListItem(result, "settlement-item")
+        )
     }
 
 }

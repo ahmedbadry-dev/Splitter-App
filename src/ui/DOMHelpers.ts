@@ -26,6 +26,27 @@ class DOMHelpers {
 
         return li
     }
+
+    static clearElement(element: HTMLElement): void{
+        while(element.firstChild){
+            element.removeChild(element.firstChild)
+        }
+    }
+
+static appendFragment<T>(
+    parent: HTMLElement,
+    items: T[],
+    createItemFn: (item: T) => HTMLElement
+): void {
+    const fragment = document.createDocumentFragment()
+
+    items.forEach(item => {
+        fragment.appendChild(createItemFn(item))
+    })
+
+    parent.appendChild(fragment)
+}
+
 }
 
 export default DOMHelpers
