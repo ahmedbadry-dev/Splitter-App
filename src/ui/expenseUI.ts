@@ -28,6 +28,8 @@ class ExpenseUI implements IExpenseUI{
         resultArea: HTMLUListElement
         settledHint: HTMLSpanElement
         expenseHint: HTMLSpanElement
+        settleDivLoader: HTMLDivElement
+        settleDiv: HTMLDivElement
     }
 
 
@@ -56,6 +58,8 @@ class ExpenseUI implements IExpenseUI{
             resultArea: DOMHelpers.getElementById<HTMLUListElement>('resultArea'),
             settledHint: DOMHelpers.getElementById<HTMLSpanElement>('settledHint'),
             expenseHint: DOMHelpers.getElementById<HTMLSpanElement>('expenseHint'),
+            settleDivLoader: DOMHelpers.getElementById<HTMLDivElement>('settleDivLoader'),
+            settleDiv: DOMHelpers.getElementById<HTMLDivElement>('settleDiv'),
         }
 
     }
@@ -190,14 +194,50 @@ class ExpenseUI implements IExpenseUI{
         }
     }
 
-    displayResults(results: string[]){
-        console.log(results);
+    // displayResults(results: string[]){
+    //     console.log(results);
         
-        DOMHelpers.clearElement(this.elements?.resultArea)
+    //     DOMHelpers.clearElement(this.elements?.resultArea)
         
+    //     if (results.length === 0) {
+    //         const noResultsItem = DOMHelpers.createListItem('All expense are settled!', "no-results")
+    //         this.elements?.resultArea.appendChild(noResultsItem)
+    //         return;
+    //     }
+
+    //     DOMHelpers.appendFragment(
+    //         this.elements.resultArea,
+    //         results,
+    //         (result) => DOMHelpers.createListItem(result, ['li-style', 'animate-fadeIn'])
+    //     )
+    // }
+
+    displayResults(results: string[]) {
+    console.log(results);
+
+    // Clear previous content
+    DOMHelpers.clearElement(this.elements?.resultArea);
+
+    // Show loading placeholder
+    const skeletonWidths = ['max-w-[30%]', 'max-w-[50%]', 'max-w-[70%]', 'max-w-[40%]'];
+        DOMHelpers.appendFragment(
+            this.elements.resultArea,
+            skeletonWidths,
+            (width) => DOMHelpers.createListItem('', ['bg-zinc-300', 'p-4', 'rounded-md', 'animate-pulse', width])
+        );
+
+
+    // Simulate async loading if needed (optional)
+    setTimeout(() => {
+        // Clear loading
+        DOMHelpers.clearElement(this.elements?.resultArea);
+
+        this.elements?.settleDiv.classList.remove('hidden');
+        this.elements?.settleDivLoader.classList.add('hidden');
+
         if (results.length === 0) {
-            const noResultsItem = DOMHelpers.createListItem('All expense are settled!', "no-results")
-            this.elements?.resultArea.appendChild(noResultsItem)
+            const noResultsItem = DOMHelpers.createListItem('All expenses are settled!', 'no-results');
+            this.elements?.resultArea.appendChild(noResultsItem);
             return;
         }
 
@@ -205,8 +245,10 @@ class ExpenseUI implements IExpenseUI{
             this.elements.resultArea,
             results,
             (result) => DOMHelpers.createListItem(result, ['li-style', 'animate-fadeIn'])
-        )
-    }
+        );
+    }, 1000); // 500ms delay for effect
+}
+
 
 }
 
