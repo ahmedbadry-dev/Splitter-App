@@ -12,11 +12,11 @@ interface IExpenseService {
     clear(): void
 }
 
-type Settlement = {
-  from: string
-  to: string
-  amount: number
-}
+// type Settlement = {
+//   from: string
+//   to: string
+//   amount: number
+// }
 
 
 
